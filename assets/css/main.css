@@ -2638,6 +2638,11 @@ input, select, textarea {
 			width: 100%;
 		}
 
+		div.image_appendix {
+			display: block;
+			width: 100%;
+		}
+
 			.image.main:first-child {
 				margin-top: 0;
 			}
