@@ -5,7 +5,7 @@
 
 # [Project 1: What Makes Teams Win in Baseball? (Part 1: Runs Scored)](https://github.com/shk204105/MLB_Team_RunsScored_Prediction)
 <p float="left">
-  <img src="images/CorrMatrix_rs.png" width="450" height="450">
+  <img src="images/corrMatrix_rs.png" width="450" height="450">
 </p>
 
 - Started with understanding the nature of baseball.
