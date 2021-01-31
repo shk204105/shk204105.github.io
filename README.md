@@ -5,8 +5,7 @@
 
 # [Project 1: What Makes Teams Win in Baseball? (Part 1: Runs Scored)](https://github.com/shk204105/MLB_Team_RunsScored_Prediction)
 <p float="left">
-  <img src="images/Filtered Correlation Matrix.png" width="450" height="450">
-  <img src="images/KDE plot.png" width="450" height="450">
+  <img src="images/Filtered Correlation Matrix_rs.png" width="450" height="450">
 </p>
 
 - Started with understanding the nature of baseball.
@@ -21,8 +20,7 @@
 
 # [Project 2: What Makes Teams Win in Baseball? (Part 2: Runs Allowed)](https://github.com/shk204105/MLB_Team_RunsAllowed_Prediction)
 <p float="left">
-  <img src="images/Filtered Correlatoin Matrix (Pitching).png" width="450" height="450">
-  <img src="images/Histogram (Pitching).png" width="450" height="450">
+  <img src="images/Filtered Correlatoin Matrix_ra.png" width="450" height="450">
 </p>
 
 - Started with understanding the nature of baseball.
