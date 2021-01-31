@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns="http://www.w3.org/1999/html">
+	<head>
+		<title>Generic Page - Massively by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<SCRIPT SRC='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></SCRIPT>
+		<SCRIPT>MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}})</SCRIPT>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Sabermetrics</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Projects</a></li>
+							<li class="active"><a href="generic.html">MLB Analysis</a></li>
+							<li><a href="elements.html">About Me</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/shk204105" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.kaggle.com/sanghyunkim123" class="icon brands alt fa-kaggle"><span class="label">Kaggle</span></a></li>
+							<li><a href="https://www.linkedin.com/in/sanghyun-kim-69498a192/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<span class="date">January 12, 2021</span>
+									<h1>OPS vs wOBA,<br />
+									Which one is a better hitting statistic?</h1>
+								</header>
+								<div class="image main"><img src="images/Mike%20Trout.jpg" alt="" /></div>
+								<h4>1. Referred Article</h4>
+								<p><i> Prospectus Feature: OPS and wOBA, Briefly Revisited (Baseball Prospectus, 2018) </i></p>
+								<h4>2. Summary</h4>
+								<p> An easy way for baseball fans to predict a team’s runs scored (RS) would be to look at <b>On-Base-Plus-Slugging (OPS)</b>, the sum of <i> OBP </i> and <i>SLG</i>. However, despite its simplicity in terms of calculation, OPS contains fundamental drawbacks itself. Intuitively, it makes no sense to simply combine a rate statistic, OBP (i.e. represented as percentages), and weighted statistic that is not presented as percentages, SLG. Thus, the resulting stat, which is called OPS, is mathematically wrong. </br>
+									Furthermore, the weights assigned to each batting event involved in SLG (e.g 2 for doubles, 3 for triples etc.) has also proved to be overrated by computer simulations.
+									To refine such drawbacks to OPS, Tom Tango, a sabermetrician, has devised an ultimate measurement of batting performance, wOBA. Since the invention of wOBA, it has been considered the single best measurement for batters’ hitting ability, as it properly weighs all the different hitting events and adjusts other external factors that affect hitting performance like Park Factor. Therefore, it is no wonder that sabermetricians and fans consider wOBA superior to OPS in terms of a team’s run production.
+									Nevertheless, in July 2013, Cyril Morong, an economics professor at San Antonio College, found that the correlation between team OPS and RS is higher than the correlation between team wOBA and RS. Such a result seemed to reverse current beliefs about the accuracy of wOBA and to threat its overwhelming status as a single best batting performance measurement. Which is a better statistic?
+								</p>
+								<h4>3. Analysis</h4>
+								<p>I have conducted two linear regression models in Python and have compared the results of those two models (Note: seasonal team batting statistics from 2010 and 2019 obtained from FanGraphs.com has been utilized in both models). </br>
+									In the first model, the independent variable is team OPS, while the dependent variable is team RS per game. The correlation between team OPS and RS is about 0.951 and it yields an RMSE of 24.857 and R-squared of 0.921 (measured on testing data, so the R-squared is slightly different from an R<sup>2</sup> of 0.904).
+									Whereas I selected team wOBA as an independent variable and Team RS per game as a dependent variable in the second model. The correlation is approximately 0.906 and yields an RMSE of 35.750 and R-squared of 0.836 (<i>see <b>5. Appendix</b></i>). </br>
+									Unlike the common beliefs about the superiority of wOBA to OPS, according to those two statistical models, OPS is more correlated with teams’ run production. Of course, the correlation does not necessarily indicate causal relationships between different factors. Nonetheless, OPS somehow seems to do better in predicting teams’ runs scored given those numbers. Then how should we explain the computational drawbacks to OPS? </br>
+									To explain such a weird result, let’s briefly have a look at formulas for both OPS and wOBA. (<i>see <b>4. formula below</b> </i>). In the OPS formula, the first component is OBP and the second part of the equation represents SLG. Disregarding (or admitting) the computational flaws in OPS (i.e. inaccurate weights for each hitting event and two different denominators that is summed), let’s focus on the hitting events that compose OPS.
+									In the numerator, it includes <i> <b> 1B, 2B, 3B, BB (UIBB + IBB), HBP, and HR </b> </i> as tools for offense. </br>
+									What about <b>wOBA?</b> It includes <i> NIBB (non-intentional BB), HBP, 1B, 2B, 3B, and HR </i>. That’s it. As astute readers might have noticed, wOBA excludes <i> <b>IBB (intentional BB) </b></i>as a tool for offense unlike OPS does. The reason is simple. wOBA is devised to accurately measure individual batters’ contribution to teams’ runs scored. Therefore, it would have had to rule out hitting events that do not represent batters’ pure hitting ability.
+									I agree with this idea to the extent that I view wOBA as an ultimate measure of batters’ hitting ability. </br>
+									Nevertheless, baseball is a sport. In other words, there are also other external factors that contribute to teams’ run production (<i>e.g luck, health, temperature, etc.</i>). Thus, the pure hitting ability of batters for driving and scoring runs is not the only factors that produce runs. The <i>intentional BB</i> (excluded from the wOBA calculation, but not from OPS. Thanks to OPS!), forces batters at the plate to reach first, which indeed increases the probability of scoring runs.
+									<i> <b>IBB</b> </i> also indicates the greatness of hitters in a way. Otherwise, why do pitchers intend to avoid throwing pitches at those who get IBBs?  No matter whether it is far from batters’ hitting ability or not, it is a factor that should still be considered when predicting teams’ runs scored. I believe that this is what makes the correlation between team OPS and RS higher than the correlation between team wOBA and RS (<i>i.e. whether intended or not, OPS considers factors ruled out from wOBA that it should not be when predicting teams’ runs scored</i>). </br>
+									<b>Bottom line</b>: Without a doubt, we cannot deny that there are fundamental computational flaws in OPS calculation, and thus, OPS makes it difficult to accurately measure individual players’ actual contribution to teams’ run production. Therefore, it is more reasonable to rely on wOBA when evaluating individual players’ hitting abilities. However, since baseball is a sport consisting of both measurable and unmeasurable factors, I daresay we also need to keep an eye on stats that contain (or represent) unmeasurable factors.
+								</p>
+								<h4>4. Formula</h4>
+								<li><b>wOBA</b>$${{H+BB+HBP}\over{AB+BB+HBP+SF}}+{{1B+(2\times 2B)+(3\times 3B)+(4\times HR)}\over{AB}}$$</li>
+								<li><b>wOBA</b>$${(0.69\times NIBB)+(0.719\times HBP)+(0.87\times 1B)+(1.217\times 2B)+(1.529\times 3B)+(1.94\times HR)}\over{AB+BB-IBB+SF+HBP}$$</li>
+								<h4>5. References</h4>
+								<p>Baseball Prospectus (2018). Prospectus Feature: OPS and wOBA, Briefly Revisited. Retrieved from https://www.baseballprospectus.com/news/article/41203/prospectus-feature-ops-and-woba-briefly-revisited/</br>
+								FANGRAPHS (2010). OPS and OPS+. Retrieved from https://library.fangraphs.com/offense/ops/</br>
+								FANGRAPHS (2010). wOBA. Retrieved from https://library.fangraphs.com/offense/woba/</p>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>Syndey, NSW, Australia<br /></p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p> </p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p>shk204105@gmail.com</p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://github.com/shk204105" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://www.kaggle.com/sanghyunkim123" class="icon brands alt fa-kaggle"><span class="label">Kaggle</span></a></li>
+									<li><a href="https://www.linkedin.com/in/sanghyun-kim-69498a192/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
