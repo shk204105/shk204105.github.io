@@ -44,42 +44,76 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<span class="date">Februarxy 22, 2021</span>
-									<h1>40% Hitting? 70% Pitching?</h1>
+									<span class="date">February 22, 2021</span>
+									<h1>40% Hitting? </br>
+										50% Pitching? </h1>
 								</header>
-								<div class="image main"><img src="images/Mike%20Trout.jpg" class="image fit" alt="" /></div>
-								<h4>1. Referred Article</h4>
-								<p><i> Prospectus Feature: OPS and wOBA, Briefly Revisited (Baseball Prospectus, 2018) </i></p>
-								<h4>2. Summary</h4>
-								<p> An easy way for baseball fans to predict a team’s runs scored (RS) would be to look at <b>On-Base-Plus-Slugging (OPS)</b>, the sum of <i> OBP </i> and <i>SLG</i>. However, despite its simplicity in terms of calculation, OPS contains fundamental drawbacks itself. Intuitively, it makes no sense to simply combine a rate statistic, OBP (i.e. represented as percentages), and weighted statistic that is not presented as percentages, SLG. Thus, the resulting stat, which is called OPS, is mathematically wrong. </br>
-									Furthermore, the weights assigned to each batting event involved in SLG (e.g 2 for doubles, 3 for triples etc.) has also proved to be overrated by computer simulations.
-									To refine such drawbacks to OPS, Tom Tango, a sabermetrician, has devised an ultimate measurement of batting performance, wOBA. Since the invention of wOBA, it has been considered the single best measurement for batters’ hitting ability, as it properly weighs all the different hitting events and adjusts other external factors that affect hitting performance like Park Factor. Therefore, it is no wonder that sabermetricians and fans consider wOBA superior to OPS in terms of a team’s run production.
-									Nevertheless, in July 2013, Cyril Morong, an economics professor at San Antonio College, found that the correlation between team OPS and RS is higher than the correlation between team wOBA and RS. Such a result seemed to reverse current beliefs about the accuracy of wOBA and to threat its overwhelming status as a single best batting performance measurement. Which is a better statistic?
+								<div class="image main"><img src="images/111358666_original.jpg" class="image fit" alt="" /></div>
+								<h4>1. Introduction</h4>
+								<p>Baseball is a complicated sport that consists of various external factors. Not only player skills but also other factors affect the ball game such as money, team chemistry, weather and so on (even luck as well).
+									These external factors can be broken down as follows: (i) <i>what we can measure and predict</i>, and (ii) <i>what we cannot</i>. While we can easily measure player skills with the help of advanced sabermetrics, how would you measure (or predict) luck or team chemistry?
+									Therefore, teams would definitely benefit from developing player skills rather than focusing on the unmeasurable. </br>
+									The player skills can further be broken down into four different areas: <b>Hitting</b>, <b>Pitching</b>, <b>Fielding</b> and <b>Baserunning</b>. In this column, I will statistically analyze how player skills affect a team’s winning percentage and provide readers with guidance on what aspects of player skills teams should focus on to win the ball game.
+								</p>
+								<h4>2. Methodology</h4>
+								<p> To find accurate percentage contributions of those four aspects of player skills, I first selected a single team stat for each aspect. Although those aspects of player skills (i.e. hitting, pitching, fielding and baserunning) cannot be perfectly explained by any single stat, I decided to use one stat for each part of skills to avoid overestimation problems.
+									For example, if we used OBP and OPS (or OBP and SLG) together as a representative of team’s hitting ability, then the importance of hitting ability would be overvalued because <i>doubles</i>, <i>triples</i>, and <i>home runs</i> are counted in both stats. </br>
+									The stat selection criteria are the following: (i) <i>what’s the primary job of players in terms of those four different aspects?</i> (ii) <i>how well does each stat reflect (measure) those primary jobs?</i>  Based on these two criteria, I’ve obtained team <b>wOBA</b> for hitting, <b>FIP</b> for pitching, <b>Def</b> for fielding and <b>BsR</b> for baserunning data from FanGraphs. </br>
+									More details on feature selection: </br>
+										<li><b>Hitting</b>: For hitting, the primary job of hitters is to score runs (or drive runs) by reaching bases and advancing runners on bases. Therefore, I needed a stat that only quantifies <i>the pure hitting ability</i> but excludes all other things such as a baserunning ability or fielding ability. In this regard, the perfect (at least the best for now) fit would be <b>wOBA</b>.
+											Unlike other conventional stats like SLG or OPS, wOBA assigns different weights to each hitting event (single, double, triple, home run, walks etc.) in terms of run production. One of the most common problem that conventional stats have is either they treat different hitting events equally (e.g. AVG) or they give wrong weights to each hitting event (e.g. SLG).
+											Since wOBA assigns proper weights to each hitting event based on Run Production, it also reflects the changes in run production in each season (i.e. the weights assigned to hitting events differ from season to season). Thus, at the time of writing, wOBA is considered the most powerful hitting stat. </li> </br>
+
+										<li><b>Pitching</b>: Unlike hitting, finding a single stat that properly represents the pure pitching ability is way more difficult and troublesome. There's still ongoing discussions about separating pitching ability and the fielding ability. We should keep in mind that when pitchers are on the mound, fielders also do their jobs not to allow runs, and thus, it makes difficult to properly quantify the contribution of these two jobs.
+											One attempt to separate pitching and fielding is <b>DIPS (Defense Independent Pitching Statistics)</b> devised by <i>Voros McCracken</i>. The logic is simple. According to DIPS, pitchers have no control on the balls put into play, and therefore, pitchers should be judged by only what they can control: (i) <i>Strikeouts</i>, (ii) <i>Walks</i>, and (iii) <i>Home Runs</i>. </br>
+											<b>FIP</b> is one of the most popular <i>DIPS-based</i> stat that gives different weights to those three pitching events.
+											Although I somewhat disagree with the idea that pitchers have no responsibility for balls put into play at all, other conventional stats like ERA or WHIP fail to separate pitching and fielding, so I used FIP to measure a team's <i>pure pitching ability</i>. There's another stat called SIERA which seems to resolve limitations that FIP has but this stat is only available from the 2002 season, so I decided not to use it. </li> </br>
+
+										<li><b>Fielding</b>: Fielding is a relatively more recent research area where sabermetricians still try to find better stats. The criteria to find a single fielding measurement is: (i) <i>it should be an overall stat that properly represents a team's fielding ability</i>, and (ii) <i>it should be available for old teams like 1870s teams</i>. Based on these two criteria, I used <b>Def</b> devised by <i>FanGraphs</i>. </br>
+											<b>Def</b> is the sum of <i>fielding runs above average</i> and <i>positional adjustment</i>. The fielding runs above average here is measured by <i>UZR (Ultimate Zone Rating)</i> which measures a fielder's run values compared to the probability that an average MLB fielder would successfully convert balls into outs at nine different positions. </li> </br>
+
+								<li><b>Baserunning</b>: Unlike other aspects of player skills, baserunning is an area where there are not many stats available. Some sabermetricians measure a runner's sprint speed (in ft/sec), but such data are unavailable for the past day's teams and inappropriate to use for a team's base running ability. Therefore, I used <b>BsR</b> devised by <i>FanGraphs</i>. </br>
+									According to <i>FanGraphs</i>, <b>BsR</b> is an overall base running stat that turns (i) <i>weighted stolen bases</i>, (ii) <i>weighted grounded into double play runs</i>, and (iii) <i>Ultimate Base Running (UBR)</i> into runs above/below average.</li>
+
 								</p>
 								<h4>3. Analysis</h4>
-								<p>I have conducted two linear regression models in Python and have compared the results of those two models (Note: seasonal team batting data from 2010 and 2019 obtained from FanGraphs.com were used in both models). </br>
-									In the first model, the independent variable is team <b>OPS</b>, while the dependent variable is team <b>runs scored (RS)</b>. The correlation between team OPS and RS is about <b>0.950</b> and this model yielded an R-squared of 0.903.
-									Whereas I also selected team <b>wOBA</b> as an independent variable and team <b>RS</b> as a dependent variable in the second model. The correlation between these two stats is approximately 0.906 and the second model yielded an R-squared of 0.821 (<i>see <b>5. Appendix</b></i>). </br>
-									Unlike the common beliefs about the superiority of wOBA to OPS, according to those two regression models, OPS is more correlated with teams’ run production. Of course, the correlation does not necessarily indicate causal relationships between different factors. Nonetheless, OPS somehow seems to do better in predicting teams’ runs scored given those numbers. Then how should we explain the computational drawbacks to OPS? </br>
-									To explain such a weird result, let’s briefly have a look at formulas for both OPS and wOBA. (<i>see <b>4. formula below</b> </i>). In the <i>OPS formula</i>, the first component is <i>OBP</i> and the second part of the equation represents <i>SLG</i>. Disregarding (or admitting) the computational flaws in OPS (i.e. inaccurate weights for each hitting event and two different denominators that is summed), let’s focus on the hitting events that compose OPS.
-									In the numerator, OPS includes <i> <b>1B, 2B, 3B, BB (UIBB + IBB), HBP, and HR</b> </i> as tools for offense. </br>
-									What about <b>wOBA?</b> It includes <i> <b>NIBB (non-intentional BB, equvalently UIBB), HBP, 1B, 2B, 3B, and HR</b></i>. That’s it. As astute readers might have noticed, wOBA excludes <i> <b>IBB (intentional BB) </b></i>as a tool for offense unlike OPS does.
-									The reason is simple. wOBA is devised to accurately measure individual batters’ contribution to teams’ runs scored. Therefore, Tom Tango would have had to rule out hitting events that do not represent batters’ pure hitting ability.
-									I agree with this idea to the extent that I view wOBA as an ultimate measure of batters’ hitting ability. </br>
-									Nevertheless, baseball is a sport. In other words, there are also other external factors that contribute to teams’ run production (<i>e.g luck, health, temperature, etc.</i>). Thus, the pure hitting ability of batters for driving and scoring runs is not the only factors that produce runs. The <i>intentional BB</i> (excluded from the wOBA calculation, but not from OPS. Thanks to OPS!), forces batters at the plate to reach first, which indeed increases the probability of scoring runs.
-									<i> <b>IBB</b> </i> also indicates the greatness of hitters in a way. Otherwise, why do pitchers intend to avoid throwing pitches at those who get IBBs?  No matter whether it is far from batters’ hitting ability or not, it is a factor that should still be considered when predicting teams’ runs scored. I believe that this is what makes the correlation between team OPS and RS higher than the correlation between team wOBA and RS (<i>i.e. whether intended or not, OPS considers factors ruled out from wOBA that it should not be when predicting teams’ runs scored</i>). </br>
-									<b>Bottom line</b>: Without a doubt, we cannot deny that there are fundamental computational flaws in OPS calculation, and thus, OPS makes it difficult to accurately measure individual players’ actual contribution to teams’ run production. Therefore, it is more reasonable to rely on wOBA when evaluating individual players’ hitting abilities. However, since baseball is a sport consisting of both measurable and unmeasurable factors, I daresay we also need to keep an eye on stats that contain (or represent) unmeasurable factors.
+								<p>
+									Since 1871, many external factors (e.g changes in rules and resilience of the ball, league expansion, advances in physical abilities etc.) have affected the way games are played. Therefore, those four league average stats would’ve fluctuated throughout the MLB history reflecting those external factors.
+									Likewise, looking at historical changes in each stat would also give us some general ideas about what the important factors were in different eras. To see those changes, I created two time series plots. (<i>Note: I used median values of each stat instead of mean values to avoid outlier issues. Also, I used scaled data to directly compare different stats</i>)
+									<img src="images/Time Series Plot1.png" class="image fit" alt="" />
+									According to the time series plots above, while <b>Def</b> and <b>BsR</b> have been staying constant over time, <b>wOBA</b> and <b>FIP</b> are relatively more fluctuating from season to season. It might indicate that the importance of a team’s <i>hitting</i> and <i>pitching</i> ability has been changing since 1871, while <i>fielding</i> and <i>baserunning</i> almost constantly contributed to a team’s winning percentage.
+									Another pattern we can see from this plot is that when league wOBA was relatively high (i.e. hitter-friendly eras), league FIP also got higher indicating that pitchers struggled with doing their jobs during the same eras, and <i>vice versa</i>. </br>
+									Furthermore, I also created year bins that represent different eras (e.g 1871-1899, 1900-1919 and so on) and drew another line plot to find a more general trend in how those league average stats have changed over time.
+									<img src="images/Time Series Plot2.png" class="image fit" alt="" />
+									According to the second line plots above, we can see a clearer trend. For instance, when the resilience of the ball increased in 1920 (the lively ball era), both league <b>wOBA</b> and <b>FIP</b> skyrocketed during the <i>1920-1939</i> era compared to the dead ball era (<i>Baseball-Reference</i>, 2006).
+									Hence, we can assume that the importance of each aspect of player skills has been affected by other external factors such as pitcher-friendly rule changes or increases in the resilience of the ball. </br>
+									On the other hand, I also compared how these stats differ on average depending on team winning percentages. To do so, I created a binary feature that represents whether a team’s winning percentage is <b>above 0.500</b> or <b>below 0.500</b>. </br>
+									<img src="images/Bar Plot.png" alt="" height="640" weight="480" /> </br>
+									The bar plot above depicts that there are notable differences in average stats between these two groups. While the differences in <b>wOBA</b> and <b>Def</b> are relatively larger, the difference in <b>FIP</b> is not as significant as wOBA and Def. However, the difference in <b>BsR</b> is marginal compared to other three stats.
+									Thus, it appears that <b>hitting</b> and <b>fielding</b> might have more significant impacts on a team's winning percentage than <b>pitching</b>, while <b>baserunning</b> might not be that important. </br>
+									However, it is not enough to conclude that how well each part of player skills contributes to a team’s winning percentage. Thus, I ran a random forest regression model for each era and compared <i>impurity-based feature importance</i>. The changes in feature importance in each era is shown in the horizontal bar chart below.
+									<img src="images/Feature Importance.png" class="image fit" alt="" />
+									In the <i>early days (1871 ~ 1899)</i>, <b>fielding</b> had the most significant impacts on a team's winning percentage (about 60.2%), while <b>hitting</b>, <b>pitching</b> and <b>baserunning</b> had marginal influences.
+									However, it appears that such a result has been reversed over time. The importance of <b>fielding</b> has declined throughout the history, whereas the importance of <b>hitting</b> and <b>pitching</b> has increased (especially, the constant increase in the importance of pitching is impressive).
+									<i>Most recently</i>, <b>hitting</b> and <b>pitching</b> account for the majority part of a team's winning percentage (<i>about 80% together</i>), while <b>fielding</b> and <b>baserunning</b> don't. </br>
+									Furthermore, there's another noticeable pattern here. <b>Baserunning</b> has never been as important as hitting, pitching, and fielding since the start of MLB. In other words, <i>teams have never benefited that much from successful base running in the MLB history</i>, so why would teams want to focus on base running? </br>
+									<b>Bottom line</b>: <i>Hitting and pitching are equally important over the course of a season, while fielding and baserunning may not be.</i>
 								</p>
-								<h4>4. Formula</h4>
-								<li><b>OPS</b>$${{H+BB+HBP}\over{AB+BB+HBP+SF}}+{{1B+(2\times 2B)+(3\times 3B)+(4\times HR)}\over{AB}}$$</li>
-								<li><b>wOBA</b>$${(0.69\times NIBB)+(0.719\times HBP)+(0.87\times 1B)+(1.217\times 2B)+(1.529\times 3B)+(1.94\times HR)}\over{AB+BB-IBB+SF+HBP}$$</li>
-								<h4>5. Appendix</h4>
-								<div class="image_appendix"><img src="images/scatter_OPS.png" alt="" height="450" width="400"/><img src="images/scatter_wOBA.png" alt="" height="450" width="400"/></div>
-								<div class="image_appendix"><img src="images/regression_OPS.png" alt="" height="500" width="400"/><img src="images/regression_wOBA.png" alt="" height="500" width="400"/></div>
-								<h4>6. References</h4>
-								<p>Baseball Prospectus (2018). Prospectus Feature: OPS and wOBA, Briefly Revisited. Retrieved from https://www.baseballprospectus.com/news/article/41203/prospectus-feature-ops-and-woba-briefly-revisited/</br>
-								FANGRAPHS (2010). OPS and OPS+. Retrieved from https://library.fangraphs.com/offense/ops/</br>
-								FANGRAPHS (2010). wOBA. Retrieved from https://library.fangraphs.com/offense/woba/</p>
+								<h4>4. Conclusion</h4>
+								<p>
+									In this column, I analyzed how important each aspect of player skills is in terms of a team's winning percentage. The four main areas are: <b>hitting</b>, <b>pitching</b>, <b>fielding</b> and <b>baserunning</b>, and these skills are measured by <i>wOBA</i>, <i>FIP</i>, <i>Def</i> and <i>BsR</i>, respectively. Of course, single stat is not enough to perfectly evaluate each areas of player abilities.
+									Nevertheless, as this project aims to understand <i>the impacts of pure skills</i>, I decided to use a single stat for each aspect of skills to avoid overestimation problems. </br>
+									Through my analysis, I came to a conclusion that <b>fielding</b> used to be the most significant factor for teams in the early days, <i>but such a trend seems to have changed over time</i>. Since the 1900s, <b>hitting</b> and <b>pitching</b> started to account for large proportions of team winning percentages, while fielding is getting less important than it used to be.
+									On the other hand, <b>baserunning</b> has never influenced a team's winning percentage that much. So it appears that teams would benefit from strengthening their hitting and pitching capacities. </br>
+									Nonetheless, this analysis also has several drawbacks. First, the <i>impurity-based</i>  method for measuring feature importance tend to overestimate numerical features. Thus, the percentage contributions of each stat might have been overestimated. Second, since I did not use post-season data, the result may be inappropriate to conclude how much importance those stats have for post-season results.
+									Therefore, further analysis would be required to see what makes the World Series champions, which is the ultimate goal of all MLB teams. </br>
+									In conclusion, <i>it's very hard to say exactly how many proportions of team winning percentages are explained by each aspect of player skills</i>. As I mentioned earlier, baseball is a complicated sport where many external factors affect the ball game like money, weather, or luck.
+									Thus, even if we can build a model with single stats that perfectly evaluate each aspect of player skills, such a model would still have some degree of limitations (how would you measure and say what proportions of a team's winning percentage can be explained by the <i>luck</i>?).
+									However, I hope this column has given readers some general ideas about what the importance of different aspects of player skills is and how it has changed over time.
+								</p>
+								<h4>5. References</h4>
+								<p> Baseball Reference (2006). Lively ball era. Retrieved from https://www.baseball-reference.com/bullpen/Lively_ball_era </p>
+
 							</section>
 
 					</div>
